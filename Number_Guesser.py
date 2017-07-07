@@ -1,1 +1,66 @@
 
+import random
+import sys
+
+
+def gameIntro():
+    intro = print("""Welcome to the game!\nYour goal is to guess the randomly generated number\nYou will be given hints to triangulate your guesses\nGOOD LUCK!""")
+    return intro
+
+def getUserID():
+    name = input("What is your name? This will be your user ID")
+    return name
+
+def generateProfile(username):
+    profile = {"Name":username, "Guesses":0, "Wins":0}
+    return profile
+
+def getRange():
+    print("You will select the upper range of values you wish to be generated")
+    upperLimit = input("Enter your choice. Ex: Enter 100 for a range of 1-100")
+    print("Thank you, you have selected "+ str(upperLimit))
+    return upperLimit
+
+def getNumber(numberRange):
+    number = random.randrange(1, int(numberRange), 1)
+    return number
+
+def startGame(user, secretNumber, numberRange):
+    print("Hello, " + user["Name"] + ", let's begin")
+    print("The winning number exists somewhere from 1 to " + str(numberRange))
+    playGame = True
+    while playGame == True:
+        currentGuess = int(input("Please enter a guess"))
+        if currentGuess < secretNumber:
+            print("Too low!")
+            user["Guesses"]+=1
+        if currentGuess > secretNumber:
+            print("Too high!")
+            user["Guesses"]+=1
+        if currentGuess == secretNumber:
+            print("Winner winner chicken dinner!")
+            user["Guesses"]+=1
+            user["Wins"]+=1
+            print("--Your totals so far are--")
+            for x,y in user.items():
+                print(str(x)+":"+str(y))
+            playGame = False
+            Ratio = user["Guesses"]/user["Wins"]
+            print("Average number of guesses per win = " + str(format(Ratio, '.2f')))
+            print("This is equal to " + str(format(user["Wins"]/user["Guesses"]*100, '.2f')) + "% accuracy")
+            playAgain = input("Play again? Enter Yes to continue, or No to end the program")
+            if playAgain == 'Yes' or playAgain == 'yes':
+                numberRange = getRange()
+                winningNumber = getNumber(numberRange)
+                startGame(userProfile, winningNumber, numberRange)
+            if playAgain == "No" or playAgain == "no":
+                print("Thank you for playing, it's been a pleasure.")
+                sys.exit(0)
+
+if __name__ == '__main__':
+    gameIntro()
+    userName = getUserID()
+    userProfile = generateProfile(userName)
+    numberRange = getRange()
+    winningNumber = getNumber(numberRange)
+    startGame(userProfile, winningNumber, numberRange)
