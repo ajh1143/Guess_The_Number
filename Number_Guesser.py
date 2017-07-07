@@ -1,30 +1,38 @@
-
+"""
+AJH
+Python based number game
+"""
 import random
 import sys
 
-
+#Prints user introduction
 def gameIntro():
     intro = print("""Welcome to the game!\nYour goal is to guess the randomly generated number\nYou will be given hints to triangulate your guesses\nGOOD LUCK!""")
     return intro
 
+#Returns the user's desired ID
 def getUserID():
     name = input("What is your name? This will be your user ID")
     return name
 
+#Generates a dict to be populated by UserID, Guesses, Wins during the gameplay experience
 def generateProfile(username):
     profile = {"Name":username, "Guesses":0, "Wins":0}
     return profile
 
+#Returns the user's desired range of values 
 def getRange():
     print("You will select the upper range of values you wish to be generated")
     upperLimit = input("Enter your choice. Ex: Enter 100 for a range of 1-100")
     print("Thank you, you have selected "+ str(upperLimit))
     return upperLimit
 
+#Accepts the user's defined range, generates a random number, returns this number to be used as the "winning" number
 def getNumber(numberRange):
     number = random.randrange(1, int(numberRange), 1)
     return number
 
+#Gameplay logic
 def startGame(user, secretNumber, numberRange):
     print("Hello, " + user["Name"] + ", let's begin")
     print("The winning number exists somewhere from 1 to " + str(numberRange))
@@ -57,6 +65,7 @@ def startGame(user, secretNumber, numberRange):
                 print("Thank you for playing, it's been a pleasure.")
                 sys.exit(0)
 
+#Main
 if __name__ == '__main__':
     gameIntro()
     userName = getUserID()
