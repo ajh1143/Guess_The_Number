@@ -6,34 +6,34 @@ import random
 import sys
 
 #Prints user introduction
-def gameIntro():
+def gameIntro(self):
     intro = print("""Welcome to the game!\nYour goal is to guess the randomly generated number\nYou will be given hints to triangulate your guesses\nGOOD LUCK!""")
     return intro
 
 #Returns the user's desired ID
-def getUserID():
+def getUserID(self):
     name = input("What is your name? This will be your user ID")
     return name
 
 #Generates a dict to be populated by UserID, Guesses, Wins during the gameplay experience
-def generateProfile(username):
+def generateProfile(self, username):
     profile = {"Name":username, "Guesses":0, "Wins":0}
     return profile
 
 #Returns the user's desired range of values 
-def getRange():
+def getRange(self):
     print("You will select the upper range of values you wish to be generated")
     upperLimit = input("Enter your choice. Ex: Enter 100 for a range of 1-100")
     print("Thank you, you have selected "+ str(upperLimit))
     return upperLimit
 
 #Accepts the user's defined range, generates a random number, returns this number to be used as the "winning" number
-def getNumber(numberRange):
+def getNumber(self, numberRange):
     number = random.randrange(1, int(numberRange), 1)
     return number
 
 #Gameplay logic
-def startGame(user, secretNumber, numberRange):
+def startGame(self, user, secretNumber, numberRange):
     print("Hello, " + user["Name"] + ", let's begin")
     print("The winning number exists somewhere from 1 to " + str(numberRange))
     playGame = True
